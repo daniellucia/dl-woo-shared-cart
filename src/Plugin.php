@@ -43,9 +43,9 @@ class DLWOOSharedCartPlugin
                     var code = $('#shared_cart_code').val();
                     if (code) {
                         navigator.clipboard.writeText(code).then(function() {
-                            alert('<?php echo esc_js(__('¡Enlace de carrito copiado al portapapeles!', 'dl-woo-shared-cart')); ?>');
+                            alert('<?php echo esc_js(__('Cart link copied to clipboard!', 'dl-woo-shared-cart')); ?>');
                         }, function() {
-                            alert('<?php echo esc_js(__('No se pudo copiar al portapapeles.', 'dl-woo-shared-cart')); ?>');
+                            alert('<?php echo esc_js(__('Could not copy to clipboard.', 'dl-woo-shared-cart')); ?>');
                         });
                     }
                 });
