@@ -97,19 +97,20 @@ class DLWOOSharedCartPlugin
         if (isset($_GET['shared_cart'], $_GET['shared_cart_nonce']) && wp_verify_nonce($_GET['shared_cart_nonce'], 'dl_woo_shared_cart')) {
             
             $items = @unserialize(base64_decode($_GET['shared_cart']));
-            
-            if (is_array($items)) {
-                foreach ($items as $product_id => $quantity) {
-                    $product_id = intval($product_id);
-                    $quantity = intval($quantity);
-                    if ($product_id > 0 && $quantity > 0) {
-                        WC()->cart->add_to_cart($product_id, $quantity);
-                    }
-                }
-                
-                wp_safe_redirect(wc_get_cart_url());
-                exit;
+            if (!is_array($items)) {
+                return;
             }
+            
+            foreach ($items as $product_id => $quantity) {
+                $product_id = intval($product_id);
+                $quantity = intval($quantity);
+                if ($product_id > 0 && $quantity > 0) {
+                    WC()->cart->add_to_cart($product_id, $quantity);
+                }
+            }
+            
+            wp_safe_redirect(wc_get_cart_url());
+            exit;
         }
     }
 }
