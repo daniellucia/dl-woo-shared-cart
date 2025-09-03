@@ -1,14 +1,13 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Share Cart for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-03 07:20+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: \n"
-"Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"POT-Creation-Date: 2025-09-03 07:19+0000\n"
+"PO-Revision-Date: 2025-09-03 07:21+0000\n"
+"Last-Translator: \n"
+"Language-Team: Español\n"
+"Language: es_ES\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,28 +17,28 @@ msgstr ""
 
 #: src/Plugin.php:46
 msgid "Cart link copied to clipboard!"
-msgstr ""
+msgstr "Enlace del carrito copiado en el portapapeles"
 
 #. Description of the plugin
 msgid "Comparte el carrito entre usuarios."
-msgstr ""
+msgstr "Comparte el carrito entre usuarios."
 
 #: src/Plugin.php:48
 msgid "Could not copy to clipboard."
-msgstr ""
+msgstr "No se ha podido copiar en el portapapeles."
 
 #. Author of the plugin
 msgid "Daniel Lúcia"
-msgstr ""
+msgstr "Daniel Lúcia"
 
 #. Author URI of the plugin
 msgid "http://www.daniellucia.es"
-msgstr ""
+msgstr "http://www.daniellucia.es"
 
 #: src/Plugin.php:36
 msgid "Share cart"
-msgstr ""
+msgstr "Compartir carrito"
 
 #. Name of the plugin
 msgid "Share Cart for WooCommerce"
-msgstr ""
+msgstr "Compartir carrito para WooCommerce"
