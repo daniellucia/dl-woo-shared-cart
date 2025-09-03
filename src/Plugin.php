@@ -31,8 +31,10 @@ class DLWOOSharedCartPlugin
 
         ?>
         <div style="display:inline-block; margin-left:12px;">
+            <?php do_action('dl_woo_shared_cart_input_before', $url); ?>
             <input type="text" name="shared_cart_code" id="shared_cart_code" class="input-text" value="<?php echo esc_attr($url); ?>" style="display: none;" />
             <button type="button" class="button wp-element-button" id="apply_shared_cart"><?php esc_html_e('Share cart', 'dl-woo-shared-cart'); ?></button>
+            <?php do_action('dl_woo_shared_cart_input_after', $url); ?>
         </div>
 
         <script>
@@ -77,6 +79,11 @@ class DLWOOSharedCartPlugin
             'shared_cart_nonce' => $nonce
         ], home_url('/'));
 
+        $url = apply_filters('dl_woo_shared_cart_url', $url, [
+            'shared_cart' => base64_encode(serialize($items)),
+            'shared_cart_nonce' => $nonce
+        ]);
+        
         return $url;
     }
 
