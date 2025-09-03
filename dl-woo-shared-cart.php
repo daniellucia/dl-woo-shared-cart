@@ -7,7 +7,7 @@
  * Author: Daniel Lúcia
  * Author URI: http://www.daniellucia.es
  * textdomain: dl-woo-shared-cart
- * Requires Plugins: dl-ticket-manager
+ * Requires Plugins: WooCommerce
  */
 
 defined('ABSPATH') || exit;
