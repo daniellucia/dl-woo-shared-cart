@@ -13,6 +13,7 @@ class DLWOOSharedCartPlugin
     public function init(): void
     {
         add_action('woocommerce_cart_coupon', [$this, 'addSharedCartInput']);
+        add_action('template_redirect', [$this, 'maybeLoadSharedCart']);
     }
 
     /**
@@ -78,5 +79,30 @@ class DLWOOSharedCartPlugin
 
         return $url;
     }
-    
+
+    /**
+     * Comprobamos si existe un carrito compartido y lo cargamos
+     * @return void
+     * @author Daniel Lucia
+     */
+    public function maybeLoadSharedCart()
+    {
+        if (isset($_GET['shared_cart'], $_GET['shared_cart_nonce']) && wp_verify_nonce($_GET['shared_cart_nonce'], 'dl_woo_shared_cart')) {
+            
+            $items = @unserialize(base64_decode($_GET['shared_cart']));
+            
+            if (is_array($items)) {
+                foreach ($items as $product_id => $quantity) {
+                    $product_id = intval($product_id);
+                    $quantity = intval($quantity);
+                    if ($product_id > 0 && $quantity > 0) {
+                        WC()->cart->add_to_cart($product_id, $quantity);
+                    }
+                }
+                
+                wp_safe_redirect(wc_get_cart_url());
+                exit;
+            }
+        }
+    }
 }
