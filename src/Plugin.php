@@ -58,7 +58,7 @@ class Plugin
     }
 
     /**
-     * Construimos la url para compartir carrito
+     * Construimos la url para compartir carrito, incluyendo atributos/variaciones
      * @return string
      * @author Daniel Lucia
      */
@@ -72,7 +72,17 @@ class Plugin
         foreach (WC()->cart->get_cart() as $cart_item) {
             $product_id = $cart_item['product_id'];
             $quantity = $cart_item['quantity'];
-            $items[$product_id] = $quantity;
+            $variation_id = isset($cart_item['variation_id']) ? $cart_item['variation_id'] : 0;
+            $variation = isset($cart_item['variation']) ? $cart_item['variation'] : [];
+            $attributes = isset($cart_item['attributes']) ? $cart_item['attributes'] : [];
+
+            $items[] = [
+                'product_id'   => $product_id,
+                'quantity'     => $quantity,
+                'variation_id' => $variation_id,
+                'variation'    => $variation,
+                'attributes'   => $attributes,
+            ];
         }
 
         $nonce = wp_create_nonce('dl_woo_shared_cart');
@@ -90,7 +100,7 @@ class Plugin
     }
 
     /**
-     * Comprobamos si existe un carrito compartido y lo cargamos
+     * Comprobamos si existe un carrito compartido y lo cargamos (con atributos/variaciones)
      * @return void
      * @author Daniel Lucia
      */
@@ -103,11 +113,21 @@ class Plugin
                 return;
             }
             
-            foreach ($items as $product_id => $quantity) {
-                $product_id = intval($product_id);
-                $quantity = intval($quantity);
+            foreach ($items as $item) {
+                $product_id   = intval($item['product_id'] ?? 0);
+                $quantity     = intval($item['quantity'] ?? 0);
+                $variation_id = intval($item['variation_id'] ?? 0);
+                $variation    = isset($item['variation']) && is_array($item['variation']) ? $item['variation'] : [];
+                $attributes   = isset($item['attributes']) && is_array($item['attributes']) ? $item['attributes'] : [];
+
                 if ($product_id > 0 && $quantity > 0) {
-                    WC()->cart->add_to_cart($product_id, $quantity);
+                    WC()->cart->add_to_cart(
+                        $product_id,
+                        $quantity,
+                        $variation_id,
+                        $variation,
+                        $attributes
+                    );
                 }
             }
             
