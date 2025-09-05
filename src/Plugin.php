@@ -1,8 +1,10 @@
 <?php
 
+namespace DL\SharedCart;
+
 defined('ABSPATH') || exit;
 
-class DLWOOSharedCartPlugin
+class Plugin
 {
 
     /**
