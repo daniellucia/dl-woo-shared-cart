@@ -86,7 +86,7 @@ class Plugin
         }
 
         $nonce = wp_create_nonce('dl_woo_shared_cart');
-        
+
         $args = apply_filters('dl_woo_shared_cart_args', [
             'shared_cart' => base64_encode(serialize($items)),
             'shared_cart_nonce' => $nonce
@@ -110,6 +110,8 @@ class Plugin
             if (!is_array($items)) {
                 return;
             }
+
+            do_action('dl_woo_shared_cart_before_load', $items);
             
             foreach ($items as $item) {
                 $product_id   = intval($item['product_id'] ?? 0);
