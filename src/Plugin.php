@@ -86,15 +86,13 @@ class Plugin
         }
 
         $nonce = wp_create_nonce('dl_woo_shared_cart');
-        $url = add_query_arg([
-            'shared_cart' => base64_encode(serialize($items)),
-            'shared_cart_nonce' => $nonce
-        ], home_url('/'));
-
-        $url = apply_filters('dl_woo_shared_cart_url', $url, [
+        
+        $args = apply_filters('dl_woo_shared_cart_args', [
             'shared_cart' => base64_encode(serialize($items)),
             'shared_cart_nonce' => $nonce
         ]);
+
+        $url = add_query_arg($args, home_url('/'));
         
         return $url;
     }
